@@ -1,0 +1,25 @@
+{
+  "name": "private-gourmet-app",
+  "version": "1.0.0",
+  "description": "A private chef booking app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "watch": "nodemon",
+    "seed": "node seeders/seeds.js"
+  },
+  "keywords": [],
+  "author": "May C.",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "apollo-server-express": "^3.10.2",
+    "bcrypt": "^4.0.1",
+    "express": "^4.18.1",
+    "graphql": "^15.8.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.6.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
