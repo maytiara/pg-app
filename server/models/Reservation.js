@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 const User = require('./User');
 
 const reservationSchema = new Schema({
-  numPerson: {
+  numOfPeople: {
     type: Number, // because its an integer
     required: true,
   },
@@ -22,6 +22,10 @@ const reservationSchema = new Schema({
   chefId: {
     type: Schema.Types.ObjectId,
     ref: User,
+  },
+  eventDate: {
+    type: Date,
+    require: true,
   }
 },
 
