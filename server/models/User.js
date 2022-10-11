@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 
 const userSchema = new Schema({
-	fullname: {
+	username: {
 		// user may have the same name
 		type: String,
 		required: true,
