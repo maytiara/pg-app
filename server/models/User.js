@@ -3,21 +3,23 @@ const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
   fullname: {
+    
+    // user may have the same name
     type: String,
     required: true,
-    unique: true,
     trim: true,
   },
   address: {
+    // user may have the same add
     type: String,
     required: true,
-    unique: true,
+    minlength: 1,
+    maxlength: 280,
     trim: true,
   },
   company: {
+    // user may work in the same company & this could be null
     type: String,
-    required: true,
-    unique: true,
     trim: true,
   },
   email: {
@@ -34,8 +36,8 @@ const userSchema = new Schema({
   isChef: {
     type:Boolean,
     default: false,
-    // findAll --> isTrue
-  },
+    // findAll --> isTrue ; user || chef role
+  }, 
   reservations: [
     {
       type: Schema.Types.ObjectId,

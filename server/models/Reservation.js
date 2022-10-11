@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const dateFormat = require('../utils/dateFormat');
+const User = require('./User');
 
 const reservationSchema = new Schema({
   numPerson: {
@@ -9,8 +9,7 @@ const reservationSchema = new Schema({
   defineExp: {
     type: String,
     required: 'Must explain your fine dining experience',
-    minlength: 1,
-    maxlength: 280,
+    minlength: 1, // user can type paragraph of this section
     trim: true,
   },
   budget: {
@@ -20,17 +19,17 @@ const reservationSchema = new Schema({
   dietary: {
     type: String, // for dropdown selection
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-    get: (timestamp) => dateFormat(timestamp),
-  },
   chefId: {
-    type: String,
-    require: true,
+    type: Schema.Types.ObjectId,
+    ref: User,
   }
-});
+},
 
-const Reservation = mongoose.model('Order', orderSchema);
+  {
+    timestamps: true, //this createdAt
+  }
+);
+
+const Reservation = mongoose.model('Reservation', reservationSchema);
 
 module.exports = Reservation;
