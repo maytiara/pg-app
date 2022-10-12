@@ -1,0 +1,38 @@
+.heroImg{
+  content: '';
+  background: url('../images/home-page-bg.jpg') no-repeat center center/cover;
+  min-height: 100%;
+  min-width: 100%;
+  position: absolute;
+  margin: auto;
+  z-index: -1;
+}
+
+.header {
+  width: 100%;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  transition: .3s ease-in;
+  overflow: hidden;
+}
+
+.logoSrc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.logoSrc > img{
+  width: 45vh;
+}
+
+.heroTagline > p {
+  font-family: var(--primary-font-family);
+  color: var(  --secondary-color-white);
+  position: relative;
+  font-weight: 300;
+  font-size: 5vh;
+}
+
