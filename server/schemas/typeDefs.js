@@ -15,7 +15,7 @@ const typeDefs = gql`
   type Reservation {
     _id: ID
     numOfPeople: Int!
-    defineExp: String
+    description: String
     budget: String
     dietary: String
     createdAt: String
@@ -31,15 +31,17 @@ const typeDefs = gql`
   #see resolvers to match the argument
   type Query { 
     users: [User]
+    user(username: String!): User
     
     #added this logic for every user it can be chef or user only
     #for every User there will have a set of chefs
-    chefs: [User]
+    chef: [User]
 
-    #
     reservations(chefId: ID!): [Reservation]
 
-    #
+    #-- for optional usage
+    reservation(reservationId: ID!): Reservation
+
     me: User
   }
 
@@ -48,9 +50,15 @@ const typeDefs = gql`
     #required for login&signup
     addUser(username: String!, email: String!, password: String!, company: String, address: String!, isChef: Boolean): Auth
 
+    #--added to check/update the User info
+    updateUser(username: String, email: String, password: String, company: String, address: String, isChef: Boolean): User
+
     login(email: String!, password: String!): Auth
 
-    addReservation (eventDate: String!, numOfPeople: Int!, defineExp: String!, budget: String!, dietary: String, chefId: ID!)
+    addReservation (eventDate: String!, numOfPeople: Int!, defineExp: String!, budget: String!, dietary: String, chefId: ID!): Reservation
+
+    #-- added to check/update reservations
+    updateReservation (reservationId: ID!): Reservation
   }
 `;
 
