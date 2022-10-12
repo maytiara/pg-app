@@ -21,6 +21,7 @@ const typeDefs = gql`
     createdAt: String
     chefId: ID
     eventDate: String! #added for the selection date
+    // TODO this comment after the review
   }
 
   type Auth {
@@ -35,11 +36,13 @@ const typeDefs = gql`
     
     #added this logic for every user it can be chef or user only
     #for every User there will have a set of chefs
+    // TODO this comment after the review
     chef(userId: ID!): User
 
     reservations(chefId: ID!): [Reservation]
 
     #-- for optional usage
+    // TODO this comment after the review
     reservation(reservationId: ID!): Reservation
 
     me: User
