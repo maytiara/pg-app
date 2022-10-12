@@ -37,7 +37,7 @@ const typeDefs = gql`
     #added this logic for every user it can be chef or user only
     #for every User there will have a set of chefs
     #(TODO this comment after the review)
-    chef(userId: ID!): User
+    chefs(_id: ID!): User
 
     reservations(chefId: ID!): [Reservation]
 
