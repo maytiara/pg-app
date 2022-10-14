@@ -1,0 +1,15 @@
+.footerBg {
+  background-color: var(--primary-color-black);
+  opacity: 80%;
+}
+
+.footerBold {
+  font-family: var(--primary-font-family);
+  font-weight: 400;
+}
+
+.footerLight {
+  font-family: var(--primary-font-family);
+  color: var(--primary-color-beige);
+  font-weight: 400;
+}
