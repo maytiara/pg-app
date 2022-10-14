@@ -21,7 +21,6 @@ const typeDefs = gql`
     createdAt: String
     chefId: ID
     eventDate: String! #added for the selection date
-    #(TODO this comment after the review)
   }
 
   type Auth {
@@ -29,39 +28,34 @@ const typeDefs = gql`
     user: User
   }
 
-  #see resolvers to match the argument
+  #see resolvers to match the argument ; read | get
   type Query { 
     users: [User]
     user(username: String!): User
     
     #added this logic for every user it can be chef or user only
     #for every User there will have a set of chefs
-    #(TODO this comment after the review)
-    chefs(_id: ID!): User
+    #FindAll the Chef & populate the meet your chef
+    chef(id: ID): User
 
-    reservations(chefId: ID!): [Reservation]
+    reservations: [Reservation]
 
-    #-- for optional usage
-    #(TODO this comment after the review)
     reservation(reservationId: ID!): Reservation
 
     me: User
   }
 
+  #delete | put | post
   type Mutation {
 
-    #required for login&signup
+    #required for &signup
     addUser(username: String!, email: String!, password: String!, company: String, address: String!, isChef: Boolean): Auth
 
-    #--added to check/update the User info
-    updateUser(username: String, email: String, password: String, company: String, address: String, isChef: Boolean): User
+    #removed password (!)
+    login(email: String!, password: String!): Auth 
 
-    login(email: String!, password: String!): Auth
+    addReservation (eventDate: String!, numOfPeople: Int!, description: String!, budget: String!, dietary: String, chefId: ID!): Reservation
 
-    addReservation (eventDate: String!, numOfPeople: Int!, defineExp: String!, budget: String!, dietary: String, chefId: ID!): Reservation
-
-    #-- added to check/update reservations
-    updateReservation (reservationId: ID!): Reservation
   }
 `;
 

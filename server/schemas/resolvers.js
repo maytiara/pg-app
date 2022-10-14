@@ -5,35 +5,25 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
 
   // this Query have to match the typeDefs Query
-  // TODO Remove comments before the queries below after the review
   Query: {
 
-    //users: [User]
     users: async () => {
-      return User.find().populate('reservations');
+      return await User.find({}).populate('reservations');
     },
-    //user(username: String!): User
+
     user: async (parent, {username}) => {
-      return User.findOne({ username }).populate('reservations');
+      return await User.findOne({ username }).populate('reservations');
     },
 
-    // --check this one carefully
-    //chefs(userId: ID!): User
-    chefs: async (parent, { id }, context) => {
-      if (context.user) {
-        const isChef = await User.findAll(context.user.id).populate({
-          path: 'users.reservations',
-          populate: 'isChef',
-        });
-
-        return isChef.users.id(id);
-      }
-
-      throw new AuthenticationError ('Not logged in');
+    // find the chef by id
+    chef: async (parent, args ) => {
+      const chefId = await User.findAll(id.id);
+      return chefId;
     },
     //reservations(chefId: ID!): [Reservation]
-    reservations: async (parent, { chefId }) => {
-      return Reservation.findAll({ _id: chefId });
+    reservations: async () => {
+      // fix: removed ChefId
+      return await Reservation.findAll.populate('users'); 
     },
     //reservation(reservationId: ID!): Reservation
     reservation: async (parent, { reservationId }) => {
@@ -58,13 +48,7 @@ const resolvers = {
 
       return { token, user };
     },
-    // Mutation: typeDefs
-    updateUser: async (parent, args, context) => {
-      if (context.user) {
-        return await User.findByIdAndUpdate(context.user._id, args, { new: true});
-      }
-      throw new AuthenticationError('Sorry, Please logged in');
-    },
+    
     // Mutation: typeDefs
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
@@ -84,27 +68,26 @@ const resolvers = {
       return { token, user };
     },
     // Mutation: typeDefs
-    addReservation: async (parent, { reservations }, context) => {
-      console.log(context);
+    addReservation: async (parent, { eventDate, numOfPeople, description, budget, dietary }, context ) => {
       if (context.user) {
-        const reservation = new Reservation({ reservations });
+        const reservation = await Reservation.create({
+          eventDate,
+          numOfPeople,
+          description,
+          budget,
+          dietary,
+          chefId: context.user.username
+      });
 
-        await Reservation.findByIdAndUpdate(context.user._id, { $push: { reservations: reservation } });
-
-        return reservation;
+      await User.findOneAndUpdate(
+        { _id: context.user._id }, 
+        { $addToSet: { reservations: reservation._id } });
+      
+      return reservation;
       }
-
-      throw new AuthenticationError('Not logged in');
+      throw new AuthenticationError('You need to be logged in!');
     },
-    // Mutation: typeDefs
-    updateReservation: async (parent, args, context) => {
-      if (context.reservation) {
-        return await Reservation.findByIdAndUpdate(context.reservation._id, args, { new: true });
-      }
-
-      throw new AuthenticationError('Not logged in');
-    }
-  }
+  },
 
 };
 

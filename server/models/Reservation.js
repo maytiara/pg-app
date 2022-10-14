@@ -11,7 +11,6 @@ const reservationSchema = new Schema(
 			type: String,
 			required: "Must explain your fine dining experience",
 			minlength: 1, // user can type paragraph of this section
-			trim: true,
 		},
 		budget: {
 			type: String, // for dropdown selection
