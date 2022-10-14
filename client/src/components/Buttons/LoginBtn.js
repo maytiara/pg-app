@@ -1,28 +1,31 @@
 import React from 'react'
 import css from './LoginBtn.module.css'
-import { Col, Button, Container } from "react-bootstrap"
 
-const LoginBtn = () => {
+import Box from '@mui/material/Box';
+import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import MuiButton from "@mui/material/Button";
+
+export const Button = styled(MuiButton)(({ theme, pill }) => ({
+  borderRadius: pill ? theme.shape.pillRadius : theme.shape.borderRadius
+}));
+
+const theme = createTheme({
+  shape: {
+    pillRadius: 50,
+  }
+});
+
+const LoginButton = () => {
   return (
-    <Container>
-      <Col className={css.loginBtn}>
-        <Button 
-          type='submit' 
-          variant='success' 
-          size='lg'
-          className='mt-1 mb-1 w-80 rounded-pill btn-warning'
-          >
-          SIGN UP
+    <ThemeProvider theme={theme}>
+      <Box sx={{ pt: 22 }}>
+        <Button variant="outlined" size="large" pill className={css.loginBtn}>
+        &emsp;&emsp;&emsp;&emsp;LOG IN&emsp;&emsp;&emsp;&emsp;
         </Button>
-      </Col>
-    </Container>
+      </Box>
+    </ThemeProvider>
   )
 }
 
-export default LoginBtn
 
-//<div className={css.loginSpace}>
-//      <button className={css.loginBtn}>
-//        SIGN UP
-//      </button>
-//    </div>
+export default LoginButton
