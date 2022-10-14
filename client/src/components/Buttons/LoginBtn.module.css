@@ -1,0 +1,12 @@
+.loginBtn {
+  font-family: var(--primary-font-family);
+  
+}
+
+.loginBtn:hover{
+  background-color: #f1f1f1;
+}
+
+.loginSpace {
+  margin-top: 10rem;
+}

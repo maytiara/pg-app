@@ -7,10 +7,10 @@ const Home = () => {
   return (
     <div>
       <Hero />
-      <header className=''>
-      </header>
     </div>
+    
   )
+  
 }
 
 export default Home
