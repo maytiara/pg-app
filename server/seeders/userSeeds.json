@@ -22,5 +22,13 @@
     "email": "italiano@email.com",
     "password": "password103",
     "isChef": true
+  },
+  {
+    "username": "John Dimitri",
+    "address": "Lesmurdie, WA",
+    "company": "None",
+    "email": "spain@email.com",
+    "password": "password104",
+    "isChef": false
   }
 ]

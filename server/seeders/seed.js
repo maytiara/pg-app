@@ -27,14 +27,16 @@ db.once('open', async () => {
         ...reservationSeeds[i],
         chefId: randomArrayElement(chefs)._id
       });
+      
+
 
       // randomly assign the reservation to customers
       const customers = users.filter(user => !user.isChef);
       const randomCustomer = randomArrayElement(customers);
+      console.log(randomCustomer);
 
-      await User.findOneAndUpdate({ //removed ._id after randomCustomer
-
-        randomCustomer: reservation }, // to populate the reservations field in users = but it only populated one user id
+      // assigning to customers | target the username (specific)
+      await User.findOneAndUpdate( { username: randomCustomer.username }, // to populate the reservations field in users = but it only populated one user id
       {
         $addToSet: {
           reservations: _id,
