@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {
   ApolloClient,
@@ -20,10 +21,12 @@ import NoMatch from './pages/NoMatch';
 
 import ChefDetails from './pages/ChefDetails';
 
+// to linked our Apollo Sandbox
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
 
+// the authorization to pass on our header (Apollo)
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('id_token');
   return {
@@ -35,7 +38,7 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+  link: authLink.concat(httpLink), // to add the link together
   cache: new InMemoryCache(),
 });
 
@@ -45,39 +48,15 @@ function App() {
       <Router>
         <div className="App">
           <Routes>
-            <Route
-              path='/'
-              element={<Home />}
-            />
-            <Route
-              path='/login'
-              element={<Login />}
-            />
-            <Route
-              path='/signup'
-              element={<Signup />}
-            />
-            <Route
-              path='/chefs'
-              element={<Chefs />}
-            />
-            <Route
-              path='/chefs/:id'
-              element={<ChefDetails />}
-            />
+            <Route path='/'element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/signup' element={<Signup />} />
+            <Route path='/chefs' element={<Chefs />} />
+            <Route path='/chefs/:id' element={<ChefDetails />} />
             {/* or /reservation */}
-            <Route
-              path='/chefs/:id/reservation' 
-              element={<Reservation />}
-            />
-            <Route
-              path='/aboutus'
-              element={<AboutUs />}
-            />
-            <Route
-              path='*'
-              element={<NoMatch />}
-            />
+            <Route path='/chefs/:id/reservation'  element ={<Reservation />} />
+            <Route path='/about-us' element={<AboutUs />} />
+            <Route path='*' element={<NoMatch />} />
           </Routes>
         </div>
       </Router>
