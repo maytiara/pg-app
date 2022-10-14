@@ -1,0 +1,16 @@
+[
+  {
+    "numOfPeople": "2",
+    "description": "unique experience",
+    "budget": "150 per person",
+    "dietary": "Gluten-free",
+    "eventdate": "28/11/2022"
+  },
+  {
+    "numOfPeople": "2",
+    "description": "unique experience",
+    "budget": "150 per person",
+    "dietary": "Gluten-free",
+    "eventdate": "31/10/2022"
+  }
+]
