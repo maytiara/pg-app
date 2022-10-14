@@ -7,10 +7,24 @@
     "eventdate": "28/11/2022"
   },
   {
-    "numOfPeople": "2",
+    "numOfPeople": "10",
+    "description": "unique experience",
+    "budget": "100 per person",
+    "dietary": "None",
+    "eventdate": "31/12/2022"
+  },
+  {
+    "numOfPeople": "4",
+    "description": "unique experience",
+    "budget": "150 per person",
+    "dietary": "Halal",
+    "eventdate": "12/11/2022"
+  },
+  {
+    "numOfPeople": "6",
     "description": "unique experience",
     "budget": "150 per person",
     "dietary": "Gluten-free",
-    "eventdate": "31/10/2022"
+    "eventdate": "28/10/2022"
   }
 ]

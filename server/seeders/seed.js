@@ -23,7 +23,7 @@ db.once('open', async () => {
 
     // seed the reservation table
     for (let i = 0; i < reservationSeeds.length; i++) {
-      const { _id, reservation} = await Reservation.create({
+      const { _id, reservation } = await Reservation.create({
         ...reservationSeeds[i],
         chefId: randomArrayElement(chefs)._id
       });
@@ -34,7 +34,7 @@ db.once('open', async () => {
 
       await User.findOneAndUpdate({ //removed ._id after randomCustomer
 
-        randomCustomer: reservation }, // to populate the reservations field in users
+        randomCustomer: reservation }, // to populate the reservations field in users = but it only populated one user id
       {
         $addToSet: {
           reservations: _id,

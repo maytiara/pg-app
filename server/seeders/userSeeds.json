@@ -4,7 +4,23 @@
     "address": "Silicon Valley, Perth",
     "company": "Silicon Valley",
     "email": "email@email.com",
-    "password": "password01",
+    "password": "password101",
+    "isChef": true
+  },
+  {
+    "username": "Sheila Santos",
+    "address": "Applecross, Perth",
+    "company": "None",
+    "email": "sheila@email.com",
+    "password": "password102",
+    "isChef": false
+  },
+  {
+    "username": "Venice Dimitri",
+    "address": "Lesmurdie, WA",
+    "company": "Catering Business",
+    "email": "italiano@email.com",
+    "password": "password103",
     "isChef": true
   }
 ]
