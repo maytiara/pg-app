@@ -1,6 +1,5 @@
 import React from 'react';
 import css from './Hero.module.css'; //css
-import 'bootstrap';
 import LogoSrc from '../images/logo-pg.png'; //logo
 
 import LoginButton from '../Buttons/LoginBtn'; 
@@ -22,7 +21,7 @@ function Hero() {
 				</div>
         <LoginButton />
 			</div>
-      
+
     </>  
 	);
 }
