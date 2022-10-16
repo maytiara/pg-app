@@ -38,6 +38,16 @@ const theme = createTheme({
     h4: { fontSize: 40 },
     h5: { fontSize: 33 },
     h6: { fontSize: 28 },
+  },
+  breakpoints: {
+    values: {
+      xxs: 0, // small phone
+      xs: 300, // phone
+      sm: 600, // tablets
+      md: 900, // small laptop
+      lg: 1200, // desktop
+      xl: 1536 // large screens
+    }
   }
 });
 
