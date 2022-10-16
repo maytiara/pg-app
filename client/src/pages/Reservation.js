@@ -1,9 +1,12 @@
 import React from 'react'
-
+import NavBar from '../components/Buttons/NavBar';
 
 function Reservation () {
   return (
-    <div>Reservation</div>
+    <>
+			<NavBar />
+			<div>Reserations</div>
+		</>
   )
 }
   

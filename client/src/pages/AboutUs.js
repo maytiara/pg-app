@@ -1,8 +1,12 @@
 import React from 'react'
+import NavBar from '../components/Buttons/NavBar'
 
 const AboutUs = () => {
   return (
-    <div>AboutUs</div>
+    <>
+			<NavBar />
+			<div>Who we are?</div>
+		</>
   )
 }
 

@@ -112,7 +112,7 @@ export default function NavBar(props) {
                     fontWeight: 400
 									},
 								}}
-								linkButton={true} component={Link} to="/chefs"
+								linkButton={true} component={Link} to="/"
 							>
 								Logout
 							</MenuItem>
