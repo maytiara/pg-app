@@ -2,11 +2,6 @@ import React from 'react';
 import css from './Hero.module.css'; //css
 import LogoSrc from '../images/logo-pg.png'; //logo
 
-import LoginButton from '../Buttons/LoginBtn'; 
-
-import { Link } from "react-router-dom";
-import Auth from "../../utils/auth";
-
 function Hero() {
 
   return (
@@ -19,7 +14,6 @@ function Hero() {
 				<div className={css.heroTagline}>
 					<p>Book the finest dining experience in your home kitchen</p>
 				</div>
-        <LoginButton />
 			</div>
 
     </>  
