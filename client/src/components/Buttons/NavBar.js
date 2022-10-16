@@ -104,6 +104,8 @@ export default function NavBar(props) {
 							>
 								Meet Your Chef
 							</MenuItem>
+
+							{/* -- MODIFY THIS LOGOUT SO IT ALLOWS THE REGISTERED TO USE THIS MENU
               <MenuItem
 								sx={{
 									"&:hover": {
@@ -116,7 +118,7 @@ export default function NavBar(props) {
 							>
 								Logout
 							</MenuItem>
-							
+							*/}
 						</Box>
 					</Toolbar>
 				</AppBar>
