@@ -28,8 +28,6 @@ db.once('open', async () => {
         chefId: randomArrayElement(chefs)._id
       });
       
-
-
       // randomly assign the reservation to customers
       const customers = users.filter(user => !user.isChef);
       const randomCustomer = randomArrayElement(customers);
