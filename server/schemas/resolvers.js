@@ -32,7 +32,7 @@ const resolvers = {
     //me: User
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate ('reservations');
+        return User.findOne({ _id: context.user._id });
       }
       throw new AuthenticationError('Sorry, Please logged in');
     },
@@ -42,8 +42,8 @@ const resolvers = {
   Mutation: {
     
     // getting all the User fields
-    addUser: async (parent, args) => {
-      const user = await User.create(args);
+    addUser: async (parent, { username, email, password, company, address, isChef }) => {
+      const user = await User.create({ username, email, password, company, address, isChef });
       const token = signToken(user);
 
       return { token, user };
