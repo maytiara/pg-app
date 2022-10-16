@@ -12,7 +12,7 @@ function Copyright () {
   return (
     <Typography variant="body2" color="text.secondary.light" className={css.footerBold}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="https://github.com/maytiara/pg-app">
         Private Gourmet
       </Link>{' '}
       {new Date().getFullYear()}
@@ -34,7 +34,7 @@ const Footer = () => {
       >
         <Container maxWidth="sm">
           <Typography variant="body1" className={css.footerLight}>
-          < GoMarkGithub/> github.com/maytiara
+          < GoMarkGithub/>&nbsp;&nbsp;github.com/maytiara
           </Typography>
           <Copyright />
         </Container>
