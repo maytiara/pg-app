@@ -21,19 +21,13 @@ function Signup(props) {
     company: "",
     address: ""
   });
-	const [addUser] = useMutation(ADD_USER);
+	const [addUser, { error, data }] = useMutation(ADD_USER);
 
 	const handleFormSubmit = async (event) => {
 		event.preventDefault();
 		const mutationResponse = await addUser({
-			variables: {
-				username: formState.username,
-				email: formState.email,
-				password: formState.password,
-				company: formState.company,
-				address: formState.address,
+			variables:  {...formState }
 				// isChef
-			},
 		});
 		const token = mutationResponse.data.addUser.token;
 		Auth.login(token);
@@ -82,6 +76,13 @@ function Signup(props) {
 						justifyContent="center"
 						maxWidth="50vh"
 					>
+            {data ? (
+              <p>
+                Success! You may now head{' '}
+                <Link to="/">back to the homepage.</Link>
+              </p>
+            ) : ('') }
+              
 						{/* Username */}
 						<TextField
 							margin="normal"
@@ -94,6 +95,7 @@ function Signup(props) {
 							helperText="This field is required"
 							variant="standard"
 							sx={{ width: "15rem" }}
+              value={formState.username}
 							onChange={handleChange}
 						/>
 						<></>
@@ -109,6 +111,7 @@ function Signup(props) {
 							helperText="This field is required"
 							variant="standard"
 							sx={{ width: "15rem" }}
+              value={formState.email}
 							onChange={handleChange}
 						/>
 
@@ -124,10 +127,11 @@ function Signup(props) {
 							helperText="This field is required"
 							variant="standard"
 							sx={{ width: "15rem" }}
+              value={formState.password}
 							onChange={handleChange}
 						/>
 
-						{/* Password */}
+						{/* Company */}
 						<TextField
 							margin="normal"
 							required
@@ -138,10 +142,11 @@ function Signup(props) {
 							name="company"
 							variant="standard"
 							sx={{ width: "15rem" }}
+              value={formState.company}
 							onChange={handleChange}
 						/>
 
-						{/* Password */}
+						{/* Address */}
 						<TextField
 							margin="normal"
 							required
@@ -153,6 +158,7 @@ function Signup(props) {
 							helperText="This field is required"
 							variant="standard"
 							sx={{ width: "15rem" }}
+              value={formState.address}
 							onChange={handleChange}
 						/>
 
