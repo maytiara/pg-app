@@ -3,10 +3,24 @@ import { Link } from "react-router-dom";
 import theme from "../../styles/Theme";
 import { ThemeProvider } from "@mui/material/styles";
 
-import { AppBar, Box, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Toolbar, Typography, MenuItem } from "@mui/material";
+import Auth from "../../utils/auth";
+
+import {
+	AppBar,
+	Box,
+	Divider,
+	Drawer,
+	IconButton,
+	List,
+	ListItem,
+	ListItemButton,
+	ListItemText,
+	Toolbar,
+	Typography,
+	MenuItem,
+} from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
-
 
 const drawerWidth = 240;
 const navItems = ["Home", "Who we are", "Meet your Chef", "Logout"];
@@ -40,6 +54,12 @@ export default function NavBar(props) {
 	const container =
 		window !== undefined ? () => window().document.body : undefined;
 
+	// Auth route for logout
+	const logout = (event) => {
+		event.preventDefault();
+		Auth.logout();
+	};
+
 	return (
 		<Box sx={{ display: "flex" }}>
 			<ThemeProvider theme={theme}>
@@ -63,62 +83,93 @@ export default function NavBar(props) {
 							variant="h6"
 							component="div"
 							sx={{ flexGrow: 1, justify: "space-between", display: { sm: "block" } }}
-						>
-            </Typography>
-						<Box sx={{ display: { xs: "none", sm: "inherit", md: 'flex'}}}>
-              
-              {/* Menu Items */}
-              <MenuItem
+						></Typography>
+						<Box sx={{ display: { xs: "none", sm: "inherit", md: "flex" } }}>
+							{/* Menu Items */}
+							<MenuItem
 								sx={{
 									"&:hover": {
-										backgroundColor: '#C5B044',
-                    color: '#303030',
-                    fontWeight: 400,
+										backgroundColor: "#C5B044",
+										color: "#303030",
+										fontWeight: 400,
 									},
 								}}
-								linkButton={true} component={Link} to="/"
+								linkButton={true}
+								component={Link}
+								to="/"
 							>
 								Home
 							</MenuItem>
-              <MenuItem
+							<MenuItem
 								sx={{
 									"&:hover": {
-										backgroundColor: '#C5B044',
-                    color: '#303030',
-                    fontWeight: 400
+										backgroundColor: "#C5B044",
+										color: "#303030",
+										fontWeight: 400,
 									},
 								}}
-								linkButton={true} component={Link} to="/about-us"
+								linkButton={true}
+								component={Link}
+								to="/about-us"
 							>
 								Who We Are
 							</MenuItem>
-              <MenuItem
-								sx={{
-									"&:hover": {
-										backgroundColor: '#C5B044',
-                    color: '#303030',
-                    fontWeight: 400
-									},
-								}}
-								linkButton={true} component={Link} to="/chefs"
-							>
-								Meet Your Chef
-							</MenuItem>
+							
+							{/* Auth, once the user able to logged in the logout will be visible*/} 
+							{Auth.loggedIn() ? (
+								<>
+									
+									<MenuItem
+										sx={{
+											"&:hover": {
+												backgroundColor: "#C5B044",
+												color: "#303030",
+												fontWeight: 400,
+											},
+										}}
+										linkButton={true}
+										component={Link}
+										to="/chefs"
+									>
+										Meet Your Chef
+									</MenuItem>
+									<MenuItem
+										sx={{
+											"&:hover": {
+												backgroundColor: "#C5B044",
+												color: "#303030",
+												fontWeight: 400,
+											},
+										}}
+										linkButton={true}
+										component={Link}
+										onClick={logout}
+										to="/"
+									>
+										Logout
+									</MenuItem>
+								</>
+							) : (
+								<>
+								{/* Auth, the user not logged in, logout won't be visible*/} 
+									<MenuItem
+										sx={{
+											"&:hover": {
+												backgroundColor: "#C5B044",
+												color: "#303030",
+												fontWeight: 400,
+											},
+										}}
+										linkButton={true}
+										component={Link}
+										to="/chefs"
+									>
+										Meet Your Chef
+									</MenuItem>
+								</>
+							)}
+							{/* Auth*/}
 
-							{/* -- MODIFY THIS LOGOUT SO IT ALLOWS THE REGISTERED TO USE THIS MENU
-              <MenuItem
-								sx={{
-									"&:hover": {
-										backgroundColor: '#C5B044',
-                    color: '#303030',
-                    fontWeight: 400
-									},
-								}}
-								linkButton={true} component={Link} to="/"
-							>
-								Logout
-							</MenuItem>
-							*/}
 						</Box>
 					</Toolbar>
 				</AppBar>
