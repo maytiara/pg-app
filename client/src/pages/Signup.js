@@ -13,7 +13,8 @@ import Footer from "../components/Footer/Footer";
 import NavBar from "../components/Buttons/NavBar";
 import { RoundedButton } from "../styles/StyledButton";
 
-function Signup(props) {
+
+function Signup() {
 	const [formState, setFormState] = useState({ 
     username: "",
     email: "",
@@ -23,6 +24,16 @@ function Signup(props) {
   });
 	const [addUser, { error, data }] = useMutation(ADD_USER);
 
+	// update state based on form input changes
+	const handleChange = (event) => {
+		const { id, value } = event.target;
+		setFormState({
+			...formState,
+			[id]: value,
+		});
+	};
+
+	// submit form
 	const handleFormSubmit = async (event) => {
 		event.preventDefault();
 		const mutationResponse = await addUser({
@@ -33,13 +44,6 @@ function Signup(props) {
 		Auth.login(token);
 	};
 
-	const handleChange = (event) => {
-		const { name, value } = event.target;
-		setFormState({
-			...formState,
-			[name]: value,
-		});
-	};
 
 	return (
 		<div
@@ -66,6 +70,10 @@ function Signup(props) {
 						alignItems: "center",
 					}}
 				>
+					{data ? (
+                <Link to="/login"></Link>
+            ) : (
+
 					<Box
 						component="form"
 						onSubmit={handleFormSubmit}
@@ -76,33 +84,32 @@ function Signup(props) {
 						justifyContent="center"
 						maxWidth="50vh"
 					>
-            {data ? (
-              <p>
-                Success! You may now head{' '}
-                <Link to="/">back to the homepage.</Link>
-              </p>
-            ) : ('') }
               
 						{/* Username */}
 						<TextField
 							margin="normal"
-							required
+							required={true}
 							fullWidth
 							id="username"
 							label="First Name & Last Name"
-							type="username"
+							type="text"
 							name="username"
 							helperText="This field is required"
 							variant="standard"
 							sx={{ width: "15rem" }}
               value={formState.username}
 							onChange={handleChange}
+							error={error && (
+								<span className="error-text" style={{ color: "red" }}>
+									<p> Must be at least 6 characters </p>
+								</span>
+							)}
 						/>
-						<></>
+
 						{/* Email address */}
 						<TextField
 							margin="normal"
-							required
+							required={true}
 							fullWidth
 							id="email"
 							label="Email Address"
@@ -113,12 +120,17 @@ function Signup(props) {
 							sx={{ width: "15rem" }}
               value={formState.email}
 							onChange={handleChange}
+							error={error && (
+								<span className="error-text" style={{ color: "red" }}>
+									{error.message}
+								</span>
+							)}
 						/>
 
 						{/* Password */}
 						<TextField
 							margin="normal"
-							required
+							required={true}
 							fullWidth
 							id="password"
 							label="Password"
@@ -129,6 +141,11 @@ function Signup(props) {
 							sx={{ width: "15rem" }}
               value={formState.password}
 							onChange={handleChange}
+							error={error && (
+								<span className="error-text" style={{ color: "red" }}>
+									{error.message}
+								</span>
+							)}
 						/>
 
 						{/* Company */}
@@ -149,7 +166,7 @@ function Signup(props) {
 						{/* Address */}
 						<TextField
 							margin="normal"
-							required
+							required={true}
 							fullWidth
 							id="address"
 							label="Address"
@@ -160,10 +177,17 @@ function Signup(props) {
 							sx={{ width: "15rem" }}
               value={formState.address}
 							onChange={handleChange}
+							error={error && (
+								<span className="error-text" style={{ color: "red" }}>
+									{error.message}
+								</span>
+							)}
 						/>
 
 						<ThemeProvider theme={theme}>
 							<RoundedButton
+								type="submit"
+								onClick={handleFormSubmit}
 								color="secondary"
 								variant="contained"
 								sx={{ opacity: "90%" }}
@@ -178,6 +202,8 @@ function Signup(props) {
 							</RoundedButton>
 						</ThemeProvider>
 					</Box>
+					)}
+
 				</Paper>
 			</Container>
 

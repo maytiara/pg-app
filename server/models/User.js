@@ -7,6 +7,7 @@ const userSchema = new Schema({
 		type: String,
 		required: true,
 		trim: true,
+		minlength: 6,
 	},
 	address: {
 		// user may have the same add
