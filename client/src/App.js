@@ -9,7 +9,7 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import PrivateRoute from './private/PrivateRoute';
+//import PrivateRoute from './private/PrivateRoute';
 
 // have to import the ./pages/<filename>
 import Home from './pages/Home';
@@ -24,7 +24,7 @@ import ChefDetails from './pages/ChefDetails';
 
 // to linked our Apollo Sandbox
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: 'http://localhost:3001/graphql',
 });
 
 // the authorization to pass on our header (Apollo)
@@ -43,7 +43,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-
 function App() {
   return (
     <ApolloProvider client={client}>
@@ -53,11 +52,7 @@ function App() {
             <Route path='/'element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<Signup />} />
-            <Route path='/chefs' element={
-              <PrivateRoute>
-                <Chefs />
-              </PrivateRoute>
-            } />
+            <Route path='/chefs' element={<Chefs />} />
             <Route path='/chefs/:id' element={<ChefDetails />} />
             {/* or /reservation */}
             <Route path='/chefs/:id/reservation'  element ={<Reservation />} />
