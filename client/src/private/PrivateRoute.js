@@ -1,10 +1,13 @@
 import React from 'react'
-import { Navigate } from 'react-router-dom';
+import { Navigate, Route } from 'react-router-dom';
 
-function PrivateRoute ({ Component }) {
+function PrivateRoute () {
   
-  const auth = false;
-  return auth ? <Component /> : <Navigate to="/" />;
+  return localStorage.getItem("token") ? (
+    <Route />
+  ) : (
+    <Navigate to='/'/>
+  );
 }
 
 
