@@ -16,7 +16,6 @@ import Home from "./pages/Home";
 import Login from "./pages/Login.js";
 import Signup from "./pages/Signup";
 import Chefs from "./pages/Chefs";
-import ChefDetails from "./pages/ChefDetails";
 import Reservation from "./pages/Reservation";
 import AboutUs from "./pages/AboutUs";
 import NoMatch from "./pages/NoMatch";
@@ -73,7 +72,7 @@ function App() {
 						<Route path="/chefs/chef-westin-pace" element={<ChefWestinPace />} />
 
 						{/* or /reservation */}
-						<Route path="/chefs/:username/reservation" element={<Reservation />} />
+						<Route path="/reservation" element={<Reservation />} />
 						<Route path="/about-us" element={<AboutUs />} />
 						<Route path="*" element={<NoMatch />} />
 					</Routes>
