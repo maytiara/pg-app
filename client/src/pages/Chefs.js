@@ -67,7 +67,7 @@ function Chefs() {
 					<div>
 						<ThemeProvider theme={theme}>
 							<Container style={{ display: "flex", justifyContent: "center" }}>
-								<Card sx={{ maxWidth: 345 }}>
+								<Card sx={{ maxWidth: 345, minHeight: 480}}>
 									<CardActionArea>
 										<CardMedia
 											component="img"
@@ -112,7 +112,7 @@ function Chefs() {
 					<div>
 						<ThemeProvider theme={theme}>
 							<Container style={{ display: "flex", justifyContent: "center" }}>
-								<Card sx={{ maxWidth: 345 }}>
+								<Card sx={{ maxWidth: 345, minHeight: 480}}>
 									<CardActionArea>
 										<CardMedia
 											component="img"
@@ -120,7 +120,7 @@ function Chefs() {
 											src={ChefMoriahImg}
 											alt="Chef Axel Yu"
 										/>
-										<CardContent>
+										<CardContent >
 											<Typography
 												gutterBottom
 												variant="h5"
@@ -157,7 +157,7 @@ function Chefs() {
 					<div>
 						<ThemeProvider theme={theme}>
 							<Container style={{ display: "flex", justifyContent: "center" }}>
-								<Card sx={{ maxWidth: 345 }}>
+								<Card sx={{ maxWidth: 345, minHeight: 480}}>
 									<CardActionArea>
 										<CardMedia
 											component="img"
