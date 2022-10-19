@@ -3,6 +3,13 @@ const User = require("./User");
 
 const reservationSchema = new Schema(
 	{
+		email: {
+			type: String,
+			required: true,
+			unique: true,
+			trim: true, //to avoid spacing from start and end of the string
+			match: [/.+@.+\..+/, "Must match an email address!"],
+		},
 		numOfPeople: {
 			type: Number, // because its an integer
 			required: true,

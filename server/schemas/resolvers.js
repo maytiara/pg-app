@@ -68,9 +68,10 @@ const resolvers = {
       return { token, user };
     },
     // Mutation: typeDefs
-    addReservation: async (parent, { eventDate, numOfPeople, description, budget, dietary }, context ) => {
+    addReservation: async (parent, { email, eventDate, numOfPeople, description, budget, dietary }, context ) => {
       if (context.user) {
         const reservation = await Reservation.create({
+          email,
           eventDate,
           numOfPeople,
           description,
