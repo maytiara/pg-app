@@ -91,7 +91,7 @@ function Signup() {
 							required={true}
 							fullWidth
 							id="username"
-							label="First Name & Last Name"
+							label="Given Name"
 							type="text"
 							name="username"
 							helperText="This field is required"
