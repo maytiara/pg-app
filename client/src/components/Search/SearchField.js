@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import theme from '../../styles/Theme';
 
 import { ThemeProvider, styled, alpha } from '@mui/material/styles';
@@ -54,6 +54,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 function SearchField() {
   
+  // create state for holding our search field data (Later work)
+  const [searchInput, setSearchInput] = useState('');
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <ThemeProvider theme={theme}>
@@ -73,6 +76,10 @@ function SearchField() {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
+              name='searchInput'
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              type='text'
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
             />
