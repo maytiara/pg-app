@@ -1,6 +1,7 @@
 import React from 'react'
+import theme from '../../styles/Theme';
 
-import { styled, alpha } from '@mui/material/styles';
+import { ThemeProvider, styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,7 +14,7 @@ import SearchIcon from '@mui/icons-material/Search';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
-  borderRadius: theme.shape.borderRadius,
+  borderRadius: '2rem',
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   '&:hover': {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
@@ -46,19 +47,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
-      width: '20ch',
+      width: '80ch',
     },
   },
 }));
 
 function SearchField() {
   
-  
-
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
+      <ThemeProvider theme={theme}>
+      <AppBar position="static" >
+        <Toolbar sx={{display: "flex", justifyContent: "center" }}>
           <IconButton
             size="large"
             edge="start"
@@ -80,6 +80,7 @@ function SearchField() {
           
         </Toolbar>
       </AppBar>
+      </ThemeProvider>
     </Box>
   );
 }
