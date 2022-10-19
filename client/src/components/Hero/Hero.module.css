@@ -1,6 +1,6 @@
 .heroImg{
   content: '';
-  background: url('../images/home-page-bg.jpg') no-repeat center center/cover;
+  background: url('../assets/home-page-bg.jpg') no-repeat center center/cover;
   height: 100%;
   width: 100%;
   position: absolute;

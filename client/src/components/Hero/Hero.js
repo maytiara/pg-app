@@ -1,6 +1,6 @@
 import React from 'react';
 import css from './Hero.module.css'; //css
-import LogoSrc from '../images/logo-pg.png'; //logo
+import LogoSrc from '../assets/logo-pg.png'; //logo
 
 function Hero() {
 
