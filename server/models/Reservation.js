@@ -14,6 +14,9 @@ const reservationSchema = new Schema(
 			type: Number, // because its an integer
 			required: true,
 		},
+		contact: {
+			type: Number
+		},
 		description: { // Define fine dining experience content
 			type: String,
 			required: "Must explain your fine dining experience",

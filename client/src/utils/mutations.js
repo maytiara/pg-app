@@ -15,6 +15,7 @@ export const LOGIN = gql`
 export const ADD_RESERVATION = gql`
 	mutation addReservation(
 		$email: String!
+		$contact: Int
 		$eventDate: String!
 		$numOfPeople: Int!
 		$description: String!
@@ -24,6 +25,7 @@ export const ADD_RESERVATION = gql`
 	) {
 		addReservation(
 			email: $email
+			contact: $contact
 			eventDate: $eventDate
 			numOfPeople: $numOfPeople
 			description: $description
