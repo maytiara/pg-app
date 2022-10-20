@@ -10,81 +10,28 @@ import css from "./Reservation.module.css";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../styles/Theme";
 
-import moment from "moment";
-
-import {
-	Box,
-	Container,
-	Typography,
-	TextField,
-	Paper,
-	Divider,
-	MenuItem,
-	InputLabel,
-	Select
-} from "@mui/material";
-
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { Box, Container, Typography, TextField, Paper, Divider, InputLabel } from "@mui/material";
 
 import { RoundedButton } from "../styles/StyledButton";
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
-
-const chefNames = [
-	"Chef Alex Yu",
-	"Chef Moriah McGrath",
-	"Chef Oli Buenviaje",
-	"And many more...",
-];
+import DatePickerField from "../components/Forms/DatePickerField";
+import ChefSelection from "../components/Forms/ChefSelection";
 
 function Reservation() {
-	// Chef selection
-	const [personName, setPersonName] = useState();
 
-	const handleChefName = (event) => {
-		const {
-			target: { value },
-		} = event;
-		setPersonName(
-			// On autofill we get a stringified value.
-			typeof value === "string" ? value.split(",") : value
-		);
-	};
-
-	// Date Picker
-	const [selectedDate, setSelectedDate] = useState(
-		moment().format("DD-MM-YYYY")
-	);
-
-	const handleDateChange = (date) => {
-		console.log(date);
-		setSelectedDate(date);
-	};
-
+	// Mutation to add reservation
+	const [addReservation] = useMutation(ADD_RESERVATION);
+	
 	// For all the Input fields
 	const [formState, setFormState] = useState({
-		eventDate: "",
+		eventDate: "", //have to pass a values
 		email: "",
 		contact: "",
 		numOfPeople: "",
 		budget: "",
 		dietary: "",
 		description: "",
-		chefId: "",
+		chefId: "", // have to pass an array of value
 	});
-
-	const [addReservation] = useMutation(ADD_RESERVATION);
 
 	// update state based on form input changes
 	const handleChange = (event) => {
@@ -130,6 +77,7 @@ function Reservation() {
 							alignItems: "center",
 						}}
 					>
+						{Auth.loggedIn() ? (
 						<Box
 							component="form"
 							onSubmit={handleFormSubmit}
@@ -146,22 +94,16 @@ function Reservation() {
 							</Box>
 
 							<div style={{ margin: 2 }}></div>
-
-							{/* Date Picker */}
-							<LocalizationProvider dateAdapter={AdapterDayjs}>
-								<DatePicker
-									label="Select the date"
-									name="eventDate"
-									id="eventDate"
-									views={["year", "month", "day"]}
-									format={(date) => moment(date).toString("dddd, MMMM Do YYYY")}
-									value={selectedDate}
-									onChange={handleDateChange}
-									renderInput={(params) => (
-										<TextField {...params} helperText="dd/mm/yyyy" />
-									)}
-								/>
-							</LocalizationProvider>
+							<Box display="inline" justifyContent="center" >
+							<DatePickerField
+								fullWidth
+								id="eventDate"
+								type="select"
+								name="eventDate"
+								value={formState.eventDate}
+								onChange={handleChange}
+							/>
+							</Box>
 
 							{/* Email address */}
 							<TextField
@@ -246,23 +188,20 @@ function Reservation() {
 								onChange={handleChange}
 							/>
 
-							{/* Chef selection*/}
-							<Divider />
-							<InputLabel id="chefId">Select your Private Chef</InputLabel>
-							<Select
-								labelId="chefId"
+							{/* Chef selection*/} 
+							<Box display="inline" justifyContent="center">
+							<Divider  sx={{mt:2}}/>
+							<InputLabel id="chefId" sx={{mt:2}}>Select your Private Chef</InputLabel>
+							<ChefSelection 
+								fullWidth
 								id="chefId"
+								type="chefId"
 								name="chefId"
-								value={personName}
-								onChange={handleChefName}
-								MenuProps={MenuProps}
-							>
-								{chefNames.map((chefNames) => (
-									<MenuItem key={chefNames} value={chefNames}>
-										{chefNames}
-									</MenuItem>
-								))}
-							</Select>
+								value={formState.chefId}
+								onChange={handleChange}
+								sx={{mt:2, width: "15rem" }}
+								/>
+							</Box>
 
 							{/* Description */}
 							<Box display="inline" justifyContent="center">
@@ -271,7 +210,6 @@ function Reservation() {
 									How would you like your fine dining experience?
 								</Typography>
 							</Box>
-
 							<TextField
 								margin="normal"
 								required
@@ -283,12 +221,15 @@ function Reservation() {
 								multiline
 								maxRows={4}
 								sx={{ width: "15rem" }}
+								value={formState.description}
+								onChange={handleChange}
 							/>
 
 							<ThemeProvider theme={theme}>
 								<RoundedButton
 									type="submit"
 									onClick={handleFormSubmit}
+									cursor='pointer'
 									color="secondary"
 									variant="contained"
 									sx={{ opacity: "90%" }}
@@ -296,13 +237,20 @@ function Reservation() {
 									<Typography
 										sx={{ fontSize: "1.15rem", fontWeight: 300, textTransform: "none" }}
 									>
-										<Link style={{ textDecoration: "none", color: "#0c0c0c" }}>
+										<Link to="/chefs" style={{ textDecoration: "none", color: "#0c0c0c" }}>
 											Submit form
 										</Link>
 									</Typography>
 								</RoundedButton>
 							</ThemeProvider>
 						</Box>
+
+						) : (
+        <p>
+          You need to be logged in to endorse skills. Please{' '}
+          <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
+        </p>
+      )}
 					</Paper>
 				</Container>
 				<Box components="footer" sx={{ mt: "auto" }}>
