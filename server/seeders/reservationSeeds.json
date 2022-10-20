@@ -1,5 +1,6 @@
 [
   {
+    "email": "quatro@email.com",
     "numOfPeople": "2",
     "description": "unique experience",
     "budget": "150 per person",
@@ -7,6 +8,7 @@
     "eventdate": "28/11/2022"
   },
   {
+    "email": "adb@email.com",
     "numOfPeople": "10",
     "description": "unique experience",
     "budget": "100 per person",
@@ -14,6 +16,7 @@
     "eventdate": "31/12/2022"
   },
   {
+    "email": "she@email.com",
     "numOfPeople": "4",
     "description": "unique experience",
     "budget": "150 per person",
@@ -21,6 +24,7 @@
     "eventdate": "12/11/2022"
   },
   {
+    "email": "he@email.com",
     "numOfPeople": "6",
     "description": "unique experience",
     "budget": "150 per person",

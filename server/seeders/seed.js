@@ -34,6 +34,7 @@ db.once('open', async () => {
       console.log(randomCustomer);
 
       // assigning to customers | target the username (specific)
+      // this only seeded the isChef: false
       await User.findOneAndUpdate( { username: randomCustomer.username }, // to populate the reservations field in users = but it only populated one user id
       {
         $addToSet: {
