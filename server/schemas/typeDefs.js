@@ -15,14 +15,14 @@ const typeDefs = gql`
   type Reservation {
     _id: ID
     email: String!
-    contact: Int
-    numOfPeople: Int!
+    contact: String
+    numOfPeople: String
     description: String
     budget: String
     dietary: String
     createdAt: String
-    chefId: ID
-    eventDate: String! #added for the selection date
+    chefId: String
+    eventDate: String #added for the selection date
   }
 
   type Auth {
@@ -40,8 +40,8 @@ const typeDefs = gql`
     #FindAll the Chef & populate the meet your chef
     chef(id: ID): User
 
-    reservations: [Reservation]
-
+    reservations(username: String): [Reservation]
+    #used
     reservation(reservationId: ID!): Reservation
 
     me: User
@@ -56,7 +56,7 @@ const typeDefs = gql`
     #removed password (!)
     login(email: String!, password: String!): Auth 
 
-    addReservation (contact: Int, email: String!, eventDate: String!, numOfPeople: Int!, description: String!, budget: String!, dietary: String, chefId: ID!): Reservation
+    addReservation (contact: String, email: String!, eventDate: String, numOfPeople: String, description: String!, budget: String!, dietary: String, chefId: String ): Reservation
 
   }
 `;

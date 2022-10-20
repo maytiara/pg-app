@@ -1,8 +1,8 @@
 const { Schema, model } = require("mongoose");
 const User = require("./User");
 
-const reservationSchema = new Schema(
-	{
+const reservationSchema = new Schema({
+
 		email: {
 			type: String,
 			required: true,
@@ -11,11 +11,13 @@ const reservationSchema = new Schema(
 			match: [/.+@.+\..+/, "Must match an email address!"],
 		},
 		numOfPeople: {
-			type: Number, // because its an integer
+			type: String, // because its an integer
 			required: true,
 		},
 		contact: {
-			type: Number
+			type: String,
+			minlenth: 1,
+			maxlength: 16,
 		},
 		description: { // Define fine dining experience content
 			type: String,
@@ -30,11 +32,11 @@ const reservationSchema = new Schema(
 			type: String, // for dropdown selection
 		},
 		chefId: {
-			type: Schema.Types.ObjectId,
-			ref: User,
+			type: String,
+
 		},
 		eventDate: {
-			type: Date,
+			type: String,
 			require: true,
 		},
 	},

@@ -20,10 +20,10 @@ const resolvers = {
       const chefId = await User.findAll(id.id);
       return chefId;
     },
-    //reservations(chefId: ID!): [Reservation]
-    reservations: async () => {
-      // fix: removed ChefId
-      return await Reservation.findAll.populate('users'); 
+    // -!
+    reservations: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      return Reservation.find(params).sort({ createdAt: -1 });
     },
     //reservation(reservationId: ID!): Reservation
     reservation: async (parent, { reservationId }) => {
@@ -78,7 +78,7 @@ const resolvers = {
           description,
           budget,
           dietary,
-          chefId: context.user.username
+          chefId
       });
 
       await User.findOneAndUpdate(
