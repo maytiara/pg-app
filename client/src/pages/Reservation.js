@@ -1,23 +1,109 @@
 import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { Link } from "react-router-dom";
+import { ADD_RESERVATION } from "../utils/mutations";
+import Auth from "../utils/auth";
+
 import NavBar from "../components/Buttons/NavBar";
 import Footer from "../components/Footer/Footer";
 import css from "./Reservation.module.css";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../styles/Theme";
 
-import { Box, Container, Typography, TextField, Paper, Divider, MenuItem, InputLabel } from "@mui/material";
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import moment from "moment";
 
-import { Link } from "react-router-dom";
+import {
+	Box,
+	Container,
+	Typography,
+	TextField,
+	Paper,
+	Divider,
+	MenuItem,
+	InputLabel,
+	Select
+} from "@mui/material";
+
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 import { RoundedButton } from "../styles/StyledButton";
 
-function Reservation() {
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
-  // Datepicker field
-  const [value, setValue] = useState();
+const chefNames = [
+	"Chef Alex Yu",
+	"Chef Moriah McGrath",
+	"Chef Oli Buenviaje",
+	"And many more...",
+];
+
+function Reservation() {
+	// Chef selection
+	const [personName, setPersonName] = useState();
+
+	const handleChefName = (event) => {
+		const {
+			target: { value },
+		} = event;
+		setPersonName(
+			// On autofill we get a stringified value.
+			typeof value === "string" ? value.split(",") : value
+		);
+	};
+
+	// Date Picker
+	const [selectedDate, setSelectedDate] = useState(
+		moment().format("DD-MM-YYYY")
+	);
+
+	const handleDateChange = (date) => {
+		console.log(date);
+		setSelectedDate(date);
+	};
+
+	// For all the Input fields
+	const [formState, setFormState] = useState({
+		eventDate: "",
+		email: "",
+		contact: "",
+		numOfPeople: "",
+		budget: "",
+		dietary: "",
+		description: "",
+		chefId: "",
+	});
+
+	const [addReservation] = useMutation(ADD_RESERVATION);
+
+	// update state based on form input changes
+	const handleChange = (event) => {
+		const { id, value } = event.target;
+		setFormState({
+			...formState,
+			[id]: value,
+		});
+	};
+
+	// submit form
+	const handleFormSubmit = async (event) => {
+		event.preventDefault();
+		const mutationResponse = await addReservation({
+			variables: { ...formState },
+		});
+		const token = mutationResponse.data.addReservation.token;
+		Auth.login(token);
+	};
 
 	return (
 		<>
@@ -46,7 +132,7 @@ function Reservation() {
 					>
 						<Box
 							component="form"
-							onSubmit
+							onSubmit={handleFormSubmit}
 							noValidate
 							sx={{ "& > :not(style)": { m: 1, width: "38ch" } }}
 							autoComplete="off"
@@ -65,14 +151,14 @@ function Reservation() {
 							<LocalizationProvider dateAdapter={AdapterDayjs}>
 								<DatePicker
 									label="Select the date"
-									id="eventDate"
 									name="eventDate"
-									value={value}
-									onChange={(newValue) => {
-										setValue(newValue);
-									}}
+									id="eventDate"
+									views={["year", "month", "day"]}
+									format={(date) => moment(date).toString("dddd, MMMM Do YYYY")}
+									value={selectedDate}
+									onChange={handleDateChange}
 									renderInput={(params) => (
-										<TextField {...params} helperText={params?.inputProps?.placeholder} />
+										<TextField {...params} helperText="dd/mm/yyyy" />
 									)}
 								/>
 							</LocalizationProvider>
@@ -89,6 +175,8 @@ function Reservation() {
 								helperText="This field is required"
 								variant="standard"
 								sx={{ width: "15rem" }}
+								value={formState.email}
+								onChange={handleChange}
 							/>
 
 							{/* Contact No. */}
@@ -102,6 +190,8 @@ function Reservation() {
 								name="contact"
 								variant="standard"
 								sx={{ width: "15rem" }}
+								value={formState.contact}
+								onChange={handleChange}
 							/>
 
 							{/* Number of People */}
@@ -116,7 +206,11 @@ function Reservation() {
 								variant="standard"
 								helperText="For reservation of 10 or more and event booking. Please email us at enquiries@privategourmet.com.au"
 								sx={{ width: "15rem" }}
+								value={formState.numOfPeople}
+								onChange={handleChange}
 							/>
+
+							<div style={{ margin: 5 }}></div>
 
 							{/* Budget */}
 							<TextField
@@ -131,6 +225,8 @@ function Reservation() {
 								multiline
 								maxRows={1}
 								sx={{ width: "15rem" }}
+								value={formState.budget}
+								onChange={handleChange}
 							/>
 
 							{/* Dietary */}
@@ -146,29 +242,29 @@ function Reservation() {
 								multiline
 								maxRows={2}
 								sx={{ width: "15rem" }}
+								value={formState.dietary}
+								onChange={handleChange}
 							/>
 
-              {/* Chef selection*/}
-              <Divider />
-              <InputLabel id="chefId">Select your Private Chef</InputLabel>
-							<TextField
-								margin="normal"
-								required
-								fullWidth
+							{/* Chef selection*/}
+							<Divider />
+							<InputLabel id="chefId">Select your Private Chef</InputLabel>
+							<Select
+								labelId="chefId"
 								id="chefId"
-								type="chefId"
 								name="chefId"
-								helperText="This field is required"
-                select
-								sx={{ width: "15rem" }}
+								value={personName}
+								onChange={handleChefName}
+								MenuProps={MenuProps}
 							>
-                <MenuItem value="chefId1">Chef Alex Yu</MenuItem>
-                <MenuItem value="chefId2">Chef Moriah McGrath</MenuItem>
-                <MenuItem value="chefId3">Chef Oli Buenviaje</MenuItem>
-                <MenuItem value="chefId4">And more..</MenuItem>
-              </TextField>
+								{chefNames.map((chefNames) => (
+									<MenuItem key={chefNames} value={chefNames}>
+										{chefNames}
+									</MenuItem>
+								))}
+							</Select>
 
-              {/* Description */}
+							{/* Description */}
 							<Box display="inline" justifyContent="center">
 								<Divider />
 								<Typography sx={{ mt: 2, fontWeight: "italic" }}>
@@ -192,7 +288,7 @@ function Reservation() {
 							<ThemeProvider theme={theme}>
 								<RoundedButton
 									type="submit"
-									onClick
+									onClick={handleFormSubmit}
 									color="secondary"
 									variant="contained"
 									sx={{ opacity: "90%" }}
