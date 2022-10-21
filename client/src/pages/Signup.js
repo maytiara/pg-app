@@ -155,7 +155,7 @@ function Signup() {
 							fullWidth
 							id="company"
 							label="Company"
-							type="company"
+							type="text"
 							name="company"
 							variant="standard"
 							sx={{ width: "15rem" }}
@@ -170,7 +170,7 @@ function Signup() {
 							fullWidth
 							id="address"
 							label="Address"
-							type="address"
+							type="text"
 							name="address"
 							helperText="This field is required"
 							variant="standard"
