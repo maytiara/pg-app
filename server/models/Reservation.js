@@ -32,7 +32,8 @@ const reservationSchema = new Schema({
 			type: String, // for dropdown selection
 		},
 		chefName: { //replaced the chefId
-			type: String,
+			type: [String],
+			default: undefined
 		},
 		eventDate: {
 			type: String,
