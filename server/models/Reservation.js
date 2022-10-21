@@ -31,13 +31,11 @@ const reservationSchema = new Schema({
 		dietary: {
 			type: String, // for dropdown selection
 		},
-		chefId: {
+		chefName: { //replaced the chefId
 			type: String,
-
 		},
 		eventDate: {
 			type: String,
-			require: true,
 		},
 	},
 	{

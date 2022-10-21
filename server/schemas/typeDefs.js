@@ -8,7 +8,7 @@ const typeDefs = gql`
     company: String
     email: String
     password: String
-    isChef: Boolean
+    isChef: [Boolean!]! #restrictive value
     reservations: [Reservation]!
   }
 
@@ -21,7 +21,7 @@ const typeDefs = gql`
     budget: String
     dietary: String
     createdAt: String
-    chefId: String
+    chefName: [String!]! #stands for restrictive values i can be null || non-nullable it will returns valid
     eventDate: String #added for the selection date
   }
 
@@ -56,7 +56,7 @@ const typeDefs = gql`
     #removed password (!)
     login(email: String!, password: String!): Auth 
 
-    addReservation (contact: String, email: String!, eventDate: String, numOfPeople: String, description: String!, budget: String!, dietary: String, chefId: String ): Reservation
+    addReservation (contact: String, email: String!, eventDate: String, numOfPeople: String!, description: String!, budget: String!, dietary: String, chefName: String! ): Reservation
 
   }
 `;

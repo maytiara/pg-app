@@ -17,7 +17,7 @@ export const QUERY_USER = gql`
 				description
 				budget
 				dietary
-				chefId
+				chefName
 				eventDate
 			}
 		}
@@ -35,7 +35,7 @@ export const QUERY_RESERVATIONS = gql`
 			description
 			budget
 			dietary
-			chefId
+			chefName
 			eventDate
 		}
 	}
@@ -43,17 +43,19 @@ export const QUERY_RESERVATIONS = gql`
 
 //reservation
 export const QUERY_SINGLE_RESERVATION = gql`
-  reservation(reservationId: $reservationId) {
-    _id
-        contact
-        email
-        numOfPeople
-        description
-        budget
-        dietary
-        chefId
-        eventDate
-  }
+	query reservation($reservationId: ID!) {
+		reservation(reservationId: $reservationId) {
+			_id
+			contact
+			email
+			numOfPeople
+			description
+			budget
+			dietary
+			chefName
+			eventDate
+		}
+	}
 `;
 
 // me: User
@@ -73,7 +75,7 @@ export const QUERY_ME = gql`
 				description
 				budget
 				dietary
-				chefId
+				chefName
 				eventDate
 			}
 		}

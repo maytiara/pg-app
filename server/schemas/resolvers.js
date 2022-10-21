@@ -17,8 +17,8 @@ const resolvers = {
 
     // find the chef by id
     chef: async (parent, args ) => {
-      const chefId = await User.findAll(id.id);
-      return chefId;
+      const chef = await User.findAll(id.id);
+      return chef;
     },
     // -!
     reservations: async (parent, { username }) => {
@@ -68,7 +68,7 @@ const resolvers = {
       return { token, user };
     },
     // Mutation: typeDefs
-    addReservation: async (parent, { email, contact,eventDate, numOfPeople, description, budget, dietary }, context ) => {
+    addReservation: async (parent, { email, contact, eventDate, numOfPeople, description, budget, dietary, chefName }, context ) => {
       if (context.user) {
         const reservation = await Reservation.create({
           email,
@@ -78,12 +78,12 @@ const resolvers = {
           description,
           budget,
           dietary,
-          chefId
+          chefName
       });
 
       await User.findOneAndUpdate(
         { _id: context.user._id }, 
-        { $addToSet: { reservations: reservation._id } });
+        { $addToSet: { reservations: reservation } });
       
       return reservation;
       }

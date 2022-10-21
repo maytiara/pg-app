@@ -21,7 +21,7 @@ export const ADD_RESERVATION = gql`
 		$description: String!
 		$budget: String!
 		$dietary: String
-		$chefId: String
+		$chefName: String!
 	) {
 		addReservation(
 			email: $email
@@ -31,17 +31,17 @@ export const ADD_RESERVATION = gql`
 			description: $description
 			budget: $budget
 			dietary: $dietary
-			chefId: $chefId
+			chefName: $chefName
 		) {
 			_id
-			contact
 			email
+			contact
+			eventDate
 			numOfPeople
 			description
 			budget
 			dietary
-			chefId
-			eventDate
+			chefName			
 		}
 	}
 `;
