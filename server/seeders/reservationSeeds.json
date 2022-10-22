@@ -1,34 +1,42 @@
 [
   {
-    "email": "quatro@email.com",
+    "contactName": "Quatro",
     "numOfPeople": "2",
     "description": "unique experience",
+    "contact": "0400110110",
     "budget": "150 per person",
     "dietary": "Gluten-free",
+    "chefName": [],
     "eventdate": "28/11/2022"
   },
   {
-    "email": "adb@email.com",
+    "contactName": "Cinco",
     "numOfPeople": "10",
     "description": "unique experience",
+    "contact": "0400110112",
     "budget": "100 per person",
     "dietary": "None",
+    "chefName": [],
     "eventdate": "31/12/2022"
   },
   {
-    "email": "she@email.com",
+    "contactName": "Syete",
     "numOfPeople": "4",
     "description": "unique experience",
+    "contact": "0400110114",
     "budget": "150 per person",
     "dietary": "Halal",
+    "chefName": [],
     "eventdate": "12/11/2022"
   },
   {
-    "email": "he@email.com",
+    "contactName": "Walo",
     "numOfPeople": "6",
     "description": "unique experience",
+    "contact": "0400110116",
     "budget": "150 per person",
     "dietary": "Gluten-free",
+    "chefName": [],
     "eventdate": "28/10/2022"
   }
 ]

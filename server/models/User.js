@@ -28,6 +28,7 @@ const userSchema = new Schema({
 		unique: true,
     trim: true, //to avoid spacing from start and end of the string
 		match: [/.+@.+\..+/, "Must match an email address!"],
+		sparse:true //to allow null values which will later be filled with unique values 
 	},
 	password: {
 		type: String,
