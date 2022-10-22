@@ -14,7 +14,7 @@ export const LOGIN = gql`
 
 export const ADD_RESERVATION = gql`
 	mutation addReservation(
-		$email: String!
+		$contactName: String!
 		$contact: String
 		$eventDate: String
 		$numOfPeople: String!
@@ -24,7 +24,7 @@ export const ADD_RESERVATION = gql`
 		$chefName: String!
 	) {
 		addReservation(
-			email: $email
+			contactName: $contactName
 			contact: $contact
 			eventDate: $eventDate
 			numOfPeople: $numOfPeople
@@ -34,7 +34,7 @@ export const ADD_RESERVATION = gql`
 			chefName: $chefName
 		) {
 			_id
-			email
+			contactName
 			contact
 			eventDate
 			numOfPeople

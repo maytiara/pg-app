@@ -12,7 +12,7 @@ export const QUERY_USER = gql`
 			reservations {
 				_id
 				contact
-				email
+				contactName
 				numOfPeople
 				description
 				budget
@@ -30,7 +30,7 @@ export const QUERY_RESERVATIONS = gql`
 		reservations {
 			_id
 			contact
-			email
+			contactName
 			numOfPeople
 			description
 			budget
@@ -70,7 +70,7 @@ export const QUERY_ME = gql`
 			reservations {
 				_id
 				contact
-				email
+				contactName
 				numOfPeople
 				description
 				budget

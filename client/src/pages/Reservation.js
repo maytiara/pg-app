@@ -10,27 +10,34 @@ import css from "./Reservation.module.css";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../styles/Theme";
 
-import { Box, Container, Typography, TextField, Paper, Divider, InputLabel } from "@mui/material";
+import {
+	Box,
+	Container,
+	Typography,
+	TextField,
+	Paper,
+	Divider,
+	InputLabel,
+} from "@mui/material";
 
 import { RoundedButton } from "../styles/StyledButton";
 import DatePickerField from "../components/Forms/DatePickerField";
 import ChefSelection from "../components/Forms/ChefSelection";
 
-function Reservation() {
-
+function Reservation(props) {
 	// Mutation to add reservation
 	const [addReservation] = useMutation(ADD_RESERVATION);
-	
+
 	// For all the Input fields
 	const [formState, setFormState] = useState({
 		eventDate: "", //have to pass a values
-		email: "",
+		contactName: "",
 		contact: "",
 		numOfPeople: "",
 		budget: "",
 		dietary: "",
 		description: "",
-		chefId: "", // have to pass an array of value
+		chefName: String(), // have to pass an array of value
 	});
 
 	// update state based on form input changes
@@ -48,8 +55,8 @@ function Reservation() {
 		const mutationResponse = await addReservation({
 			variables: { ...formState },
 		});
-		const token = mutationResponse.data.addReservation.token;
-		Auth.login(token);
+		const token = mutationResponse.data.addReservation.token; //removed token
+		Auth.getProfile(token); //revised AuthService value
 	};
 
 	return (
@@ -78,179 +85,186 @@ function Reservation() {
 						}}
 					>
 						{Auth.loggedIn() ? (
-						<Box
-							component="form"
-							onSubmit={handleFormSubmit}
-							noValidate
-							sx={{ "& > :not(style)": { m: 1, width: "38ch" } }}
-							autoComplete="off"
-							display="inline"
-							justifyContent="center"
-							maxWidth="50vh"
-						>
-							<Box display="inline" justifyContent="center">
-								<Typography sx={{ mb: 2, fontWeight: "bold" }}>RESERVATIONS</Typography>
-								<Divider />
-							</Box>
-
-							<div style={{ margin: 2 }}></div>
-							<Box display="inline" justifyContent="center" >
-							<DatePickerField
-								fullWidth
-								id="eventDate"
-								type="select"
-								name="eventDate"
-								value={formState.eventDate}
-								onChange={handleChange}
-							/>
-							</Box>
-
-							{/* Email address */}
-							<TextField
-								margin="normal"
-								required
-								fullWidth
-								id="email"
-								label="Email Address"
-								type="email"
-								name="email"
-								helperText="This field is required"
-								variant="standard"
-								sx={{ width: "15rem" }}
-								value={formState.email}
-								onChange={handleChange}
-							/>
-
-							{/* Contact No. */}
-							<TextField
-								margin="normal"
-								required
-								fullWidth
-								id="contact"
-								label="Contact No."
-								type="contact"
-								name="contact"
-								variant="standard"
-								sx={{ width: "15rem" }}
-								value={formState.contact}
-								onChange={handleChange}
-							/>
-
-							{/* Number of People */}
-							<TextField
-								margin="normal"
-								required
-								fullWidth
-								id="numOfPeople"
-								label="For how many people?"
-								type="numOfPeople"
-								name="numOfPeople"
-								variant="standard"
-								helperText="For reservation of 10 or more and event booking. Please email us at enquiries@privategourmet.com.au"
-								sx={{ width: "15rem" }}
-								value={formState.numOfPeople}
-								onChange={handleChange}
-							/>
-
-							<div style={{ margin: 5 }}></div>
-
-							{/* Budget */}
-							<TextField
-								margin="normal"
-								required
-								fullWidth
-								id="budget"
-								label="Estimated budget per person"
-								type="budget"
-								name="budget"
-								helperText="(e.g. 100+ pp)"
-								multiline
-								maxRows={1}
-								sx={{ width: "15rem" }}
-								value={formState.budget}
-								onChange={handleChange}
-							/>
-
-							{/* Dietary */}
-							<TextField
-								margin="normal"
-								required
-								fullWidth
-								id="dietary"
-								label="Special diet or food allergens?"
-								type="dietary"
-								name="dietary"
-								helperText=""
-								multiline
-								maxRows={2}
-								sx={{ width: "15rem" }}
-								value={formState.dietary}
-								onChange={handleChange}
-							/>
-
-							{/* Chef selection*/} 
-							<Box display="inline" justifyContent="center">
-							<Divider  sx={{mt:2}}/>
-							<InputLabel id="chefId" sx={{mt:2}}>Select your Private Chef</InputLabel>
-							<ChefSelection 
-								fullWidth
-								id="chefId"
-								type="chefId"
-								name="chefId"
-								value={formState.chefId}
-								onChange={handleChange}
-								sx={{mt:2, width: "15rem" }}
-								/>
-							</Box>
-
-							{/* Description */}
-							<Box display="inline" justifyContent="center">
-								<Divider />
-								<Typography sx={{ mt: 2, fontWeight: "italic" }}>
-									How would you like your fine dining experience?
-								</Typography>
-							</Box>
-							<TextField
-								margin="normal"
-								required
-								fullWidth
-								id="description"
-								type="description"
-								name="description"
-								helperText="This field is required"
-								multiline
-								maxRows={4}
-								sx={{ width: "15rem" }}
-								value={formState.description}
-								onChange={handleChange}
-							/>
-
-							<ThemeProvider theme={theme}>
-								<RoundedButton
-									type="submit"
-									onClick={handleFormSubmit}
-									cursor='pointer'
-									color="secondary"
-									variant="contained"
-									sx={{ opacity: "90%" }}
-								>
-									<Typography
-										sx={{ fontSize: "1.15rem", fontWeight: 300, textTransform: "none" }}
-									>
-										<Link to="/chefs" style={{ textDecoration: "none", color: "#0c0c0c" }}>
-											Submit form
-										</Link>
+							<Box
+								component="form"
+								onSubmit={handleFormSubmit}
+								noValidate
+								sx={{ "& > :not(style)": { m: 1, width: "38ch" } }}
+								autoComplete="off"
+								display="inline"
+								justifyContent="center"
+								maxWidth="50vh"
+							>
+								<Box display="inline" justifyContent="center">
+									<Typography sx={{ mb: 2, fontWeight: "bold" }}>
+										RESERVATIONS
 									</Typography>
-								</RoundedButton>
-							</ThemeProvider>
-						</Box>
+									<Divider />
+								</Box>
 
+								<div style={{ margin: 2 }}></div>
+								<Box display="inline" justifyContent="center">
+									<DatePickerField
+										fullWidth
+										id="eventDate"
+										type="date"
+										name="eventDate"
+										value={formState.eventDate}
+										onChange={(e) => setFormState(e.target.value)}
+									/>
+								</Box>
+
+								{/* Contact Name */}
+								<TextField
+									margin="normal"
+									required
+									fullWidth
+									id="contactName"
+									label="Contact Name"
+									type="text"
+									name="contactName"
+									helperText="This field is required"
+									variant="standard"
+									sx={{ width: "15rem" }}
+									value={formState.contactName}
+									onChange={handleChange}
+								/>
+
+								{/* Contact No. */}
+								<TextField
+									margin="normal"
+									required
+									fullWidth
+									id="contact"
+									label="Contact No."
+									type="text"
+									name="contact"
+									variant="standard"
+									sx={{ width: "15rem" }}
+									value={formState.contact}
+									onChange={handleChange}
+								/>
+
+								{/* Number of People */}
+								<TextField
+									margin="normal"
+									required
+									fullWidth
+									id="numOfPeople"
+									label="For how many people?"
+									type="text"
+									name="numOfPeople"
+									variant="standard"
+									helperText="For reservation of 10 or more and event booking. Please email us at enquiries@privategourmet.com.au"
+									sx={{ width: "15rem" }}
+									value={formState.numOfPeople}
+									onChange={handleChange}
+								/>
+
+								<div style={{ margin: 5 }}></div>
+
+								{/* Budget */}
+								<TextField
+									margin="normal"
+									required
+									fullWidth
+									id="budget"
+									label="Estimated budget per person"
+									type="text"
+									name="budget"
+									helperText="(e.g. 100+ pp)"
+									multiline
+									maxRows={1}
+									sx={{ width: "15rem" }}
+									value={formState.budget}
+									onChange={handleChange}
+								/>
+
+								{/* Dietary */}
+								<TextField
+									margin="normal"
+									required
+									fullWidth
+									id="dietary"
+									label="Special diet or food allergens?"
+									type="text"
+									name="dietary"
+									helperText=""
+									multiline
+									maxRows={2}
+									sx={{ width: "15rem" }}
+									value={formState.dietary}
+									onChange={handleChange}
+								/>
+
+								{/* Chef selection*/}
+								<Box display="inline" justifyContent="center">
+									<Divider sx={{ mt: 2 }} />
+									<InputLabel sx={{ mt: 2 }}>
+										Select your Private Chef
+									</InputLabel>
+									<ChefSelection
+										fullWidth
+										id="chefName"
+										type="option"
+										name="chefName"
+										items={["Chef Alex Yu",
+										"Chef Moriah McGrath",
+										"Chef Oli Buenviaje",
+										"And many more..."]}
+										value={formState.chefName}
+										onSelect={handleChange}
+										sx={{ mt: 2, width: "15rem" }}
+									/>
+								</Box>
+
+								{/* Description */}
+								<Box display="inline" justifyContent="center">
+									<Divider />
+									<Typography sx={{ mt: 2, fontWeight: "italic" }}>
+										How would you like your fine dining experience?
+									</Typography>
+								</Box>
+								<TextField
+									margin="normal"
+									required
+									fullWidth
+									id="description"
+									type="text"
+									name="description"
+									helperText="This field is required"
+									multiline
+									maxRows={4}
+									sx={{ width: "15rem" }}
+									value={formState.description}
+									onChange={handleChange}
+								/>
+
+								<ThemeProvider theme={theme}>
+									<RoundedButton
+										type="submit"
+										onClick={handleFormSubmit}
+										cursor="pointer"
+										color="secondary"
+										variant="contained"
+										sx={{ opacity: "90%" }}
+									>
+										<Typography
+											sx={{ fontSize: "1.15rem", fontWeight: 300, textTransform: "none" }}
+										>
+											<Link style={{ textDecoration: "none", color: "#0c0c0c" }}>
+												Submit form
+											</Link>
+										</Typography>
+									</RoundedButton>
+								</ThemeProvider>
+							</Box>
 						) : (
-        <p>
-          You need to be logged in to endorse skills. Please{' '}
-          <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
-        </p>
-      )}
+							<p>
+								You need to be logged in to endorse skills. Please{" "}
+								<Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
+							</p>
+						)}
 					</Paper>
 				</Container>
 				<Box components="footer" sx={{ mt: "auto" }}>

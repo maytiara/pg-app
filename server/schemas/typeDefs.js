@@ -14,7 +14,7 @@ const typeDefs = gql`
 
   type Reservation {
     _id: ID
-    email: String!
+    contactName: String!
     contact: String
     numOfPeople: String
     description: String
@@ -56,7 +56,7 @@ const typeDefs = gql`
     #removed password (!)
     login(email: String!, password: String!): Auth 
 
-    addReservation (contact: String, email: String!, eventDate: String, numOfPeople: String!, description: String!, budget: String!, dietary: String, chefName: String! ): Reservation
+    addReservation (contact: String, contactName: String!, eventDate: String, numOfPeople: String!, description: String!, budget: String!, dietary: String, chefName: String! ): Reservation
 
   }
 `;
