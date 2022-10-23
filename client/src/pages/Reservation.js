@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
 import { ADD_RESERVATION } from "../utils/mutations";
+import { QUERY_RESERVATIONS } from "../utils/queries";
 import Auth from "../utils/auth";
 
 import NavBar from "../components/Buttons/NavBar";
@@ -18,15 +19,32 @@ import {
 	Paper,
 	Divider,
 	InputLabel,
+	Fab,
+	CardActions,
 } from "@mui/material";
 
 import { RoundedButton } from "../styles/StyledButton";
 import DatePickerField from "../components/Forms/DatePickerField";
 import ChefSelection from "../components/Forms/ChefSelection";
 
-function Reservation(props) {
+function Reservation({ isPublic = false }) {
 	// Mutation to add reservation
-	const [addReservation] = useMutation(ADD_RESERVATION);
+	const [addReservation] = useMutation(ADD_RESERVATION, {
+		update(cache, { data: { addReservation } }) {
+			try {
+				const { reservations } = cache.readQuery({
+					query: QUERY_RESERVATIONS, //This returns null (not sure how to fix this error)
+				});
+
+				cache.writeQuery({
+					query: QUERY_RESERVATIONS,
+					data: { reservations: [addReservation, ...reservations] },
+				});
+			} catch (e) {
+				console.error(e);
+			}
+		},
+	});
 
 	// For all the Input fields
 	const [formState, setFormState] = useState({
@@ -200,18 +218,18 @@ function Reservation(props) {
 								{/* Chef selection*/}
 								<Box display="inline" justifyContent="center">
 									<Divider sx={{ mt: 2 }} />
-									<InputLabel sx={{ mt: 2 }}>
-										Select your Private Chef
-									</InputLabel>
+									<InputLabel sx={{ mt: 2 }}>Select your Private Chef</InputLabel>
 									<ChefSelection
 										fullWidth
 										id="chefName"
 										type="option"
 										name="chefName"
-										items={["Chef Alex Yu",
-										"Chef Moriah McGrath",
-										"Chef Oli Buenviaje",
-										"And many more..."]}
+										items={[
+											"Chef Alex Yu",
+											"Chef Moriah McGrath",
+											"Chef Oli Buenviaje",
+											"And many more...",
+										]}
 										value={formState.chefName}
 										onSelect={handleChange}
 										sx={{ mt: 2, width: "15rem" }}
@@ -260,10 +278,43 @@ function Reservation(props) {
 								</ThemeProvider>
 							</Box>
 						) : (
-							<p>
-								You need to be logged in to endorse skills. Please{" "}
-								<Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
-							</p>
+							<Box>
+								<Typography variant="h6" sx={{ fontWeight: 300 }}>
+									Sorry, please sign in to your account to book for a reservation.
+								</Typography>
+								<CardActions sx={{ display: "flex", flexDirection: "column" }}>
+									<Fab
+										variant="extended"
+										size="large"
+										color="primary.dark"
+										sx={{ boxShadow: 0 }}
+										component={Link}
+										to="/login"
+									>
+										<Typography
+											sx={{ width: "20rem", color: "#0c0c0c", fontWeight: 400 }}
+										>
+											SIGN IN
+										</Typography>
+									</Fab>
+								</CardActions>
+								<CardActions sx={{ display: "flex", flexDirection: "column" }}>
+									<Fab
+										variant="extended"
+										size="large"
+										color="primary.dark"
+										sx={{ boxShadow: 0 }}
+										component={Link}
+										to="/signup"
+									>
+										<Typography
+											sx={{ width: "20rem", color: "#0c0c0c", fontWeight: 400 }}
+										>
+											CREATE AN ACCOUNT
+										</Typography>
+									</Fab>
+								</CardActions>
+							</Box>
 						)}
 					</Paper>
 				</Container>
