@@ -12,41 +12,27 @@ const MenuProps = {
 	},
 };
 
-const chefNames = [
-	"Chef Alex Yu",
-	"Chef Moriah McGrath",
-	"Chef Oli Buenviaje",
-	"And many more...",
-];
 
-function ChefSelection() {
+function ChefSelection({chefName, items}) {
+
+	//declare a default item and this item will pass the from Reservation component
+	const defaulChefSelection = items[0]
 
   // Chef selection
-	const [chefId, setchefId] = useState('Chef Alex Yu');
-
-	const handleChefName = (event) => {
-		const {
-			target: { value },
-		} = event;
-		setchefId(
-			// On autofill we get a stringified value.
-			typeof value === "string" ? value.split(",") : value
-		);
-	};
-
+	const [chefId, setChefId] = useState(defaulChefSelection)
+	
 	return (
 		<div>
 			<Select
-				labelId="chefId"
-				id="chefId"
-				name="chefId"
-				value={chefId ?? null}
-				onChange={handleChefName}
+				id={chefName}
+				name={chefName}
+				defaultValue={chefId}
+				onSelect={e => setChefId(e.target.value)}
 				MenuProps={MenuProps}
 			>
-				{chefNames.map((chefNames) => (
-					<MenuItem key={chefNames} value={chefNames}>
-						{chefNames}
+				{items.map((items) => (
+					<MenuItem key={items} value={items}>
+						{items}
 					</MenuItem>
 				))}
 			</Select>

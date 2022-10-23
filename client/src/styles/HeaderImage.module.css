@@ -1,0 +1,8 @@
+.heroHeader{
+  content: '';
+  background: url('../components/assets/chef-header-1.jpg') no-repeat center center/cover;
+  height: 100%;
+  width: 100vh;
+  position: absolute;
+  margin: auto;
+}
