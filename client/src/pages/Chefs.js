@@ -16,7 +16,6 @@ import {
 	CardMedia,
 	CardContent,
 	CardActions,
-	Button,
 	Container,
 	Typography,
 	Card,
@@ -109,9 +108,20 @@ function Chefs() {
 									</CardActionArea>
 
 									<CardActions>
-										<Button size="small" color="primary">
-											<Link to={`${url}/chef-axel-yu`}> VIEW DETAILS </Link>
-										</Button>
+										<Fab
+											variant="extended"
+											size="small"
+											color="primary.dark"
+											sx={{ shadow: "none" }}
+											component={Link}
+											to={`${url}/chef-axel-yu`}
+										>
+											<Typography
+												sx={{ width: "10rem", color: "#0c0c0c", fontWeight: 400 }}
+											>
+												VIEW DETAILS
+											</Typography>
+										</Fab>
 									</CardActions>
 								</Card>
 							</Container>
@@ -154,9 +164,20 @@ function Chefs() {
 									</CardActionArea>
 
 									<CardActions>
-										<Button size="small" color="primary">
-											<Link to={`${url}/chef-moriah-mcgrath`}> VIEW DETAILS </Link>
-										</Button>
+										<Fab
+											variant="extended"
+											size="small"
+											color="primary.dark"
+											sx={{ shadow: "none" }}
+											component={Link}
+											to={`${url}/chef-moriah-mcgrath`}
+										>
+											<Typography
+												sx={{ width: "10rem", color: "#0c0c0c", fontWeight: 400 }}
+											>
+												VIEW DETAILS
+											</Typography>
+										</Fab>
 									</CardActions>
 								</Card>
 							</Container>
@@ -199,9 +220,20 @@ function Chefs() {
 									</CardActionArea>
 
 									<CardActions>
-										<Button size="small" color="primary">
-											<Link to={`${url}/chef-oli-buenviaje`}> VIEW DETAILS </Link>
-										</Button>
+										<Fab
+											variant="extended"
+											size="small"
+											color="primary.dark"
+											sx={{ shadow: "none" }}
+											component={Link}
+											to={`${url}/chef-oli-buenviaje`}
+										>
+											<Typography
+												sx={{ width: "10rem", color: "#0c0c0c", fontWeight: 400 }}
+											>
+												VIEW DETAILS
+											</Typography>
+										</Fab>
 									</CardActions>
 								</Card>
 							</Container>
