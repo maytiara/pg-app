@@ -37,12 +37,14 @@
 
 - For a non-user page, featuring: HOME | ABOUT | CHEFS | RESERVATION(A protected route for registered users only)
 <br />
+
 ![Non-user-page](assets/private-gourmet-a.gif)
 <br />
 <br />
 
 - For a registered users page, featuring: HOME | ABOUT | CHEFS | RESERVATION(Which allows you to make a booking)
 <br />
+
 ![Registered-user-page](assets/private-gourmet-b.gif)
 <br />
 <br />
