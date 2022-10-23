@@ -28,7 +28,7 @@ import ChefWestinPace from "./components/Chefs/ChefWestinP";
 
 // to linked our Apollo Sandbox
 const httpLink = createHttpLink({
-	uri: "http://localhost:3001/graphql",
+	uri: "/graphql",
 });
 
 // the authorization to pass on our header (Apollo)
