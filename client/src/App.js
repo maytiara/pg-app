@@ -19,6 +19,7 @@ import Chefs from "./pages/Chefs";
 import Reservation from "./pages/Reservation";
 import AboutUs from "./pages/AboutUs";
 import NoMatch from "./pages/NoMatch";
+import Success from "./pages/Success";
 
 import ChefAxelYu from "./components/Chefs/ChefAxelY";
 import ChefMoriahMcgrath from "./components/Chefs/ChefMoriahM";
@@ -73,6 +74,7 @@ function App() {
 
 						{/* or /reservation */}
 						<Route path="/reservation" element={<Reservation />} />
+						<Route path="/reservation/success" element={<Success/>} />
 						<Route path="/about-us" element={<AboutUs />} />
 						<Route path="*" element={<NoMatch />} />
 					</Routes>

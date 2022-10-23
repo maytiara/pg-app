@@ -24,6 +24,8 @@ function DatePickerField() {
 			<LocalizationProvider
 				dateAdapter={AdapterDayjs}
 				fullwidth
+				name="eventDate"
+					id="eventDate"
 				sx={{ display: "flex", alignItems: "center", justifyContent: "center",
 				direction: "column" }}
 			>
