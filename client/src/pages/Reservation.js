@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ADD_RESERVATION } from "../utils/mutations";
 import { QUERY_RESERVATIONS } from "../utils/queries";
 import Auth from "../utils/auth";
@@ -27,16 +27,13 @@ import { RoundedButton } from "../styles/StyledButton";
 import DatePickerField from "../components/Forms/DatePickerField";
 import ChefSelection from "../components/Forms/ChefSelection";
 
-function Reservation(history) {
+function Reservation() {
 	// Mutation to add reservation
 	const [addReservation] = useMutation(ADD_RESERVATION, {
 		update(cache, { data: { addReservation } }) {
 			try {
 				const { reservations } = cache.readQuery({
-					query: QUERY_RESERVATIONS,
-					variables: {
-						...formState, // with or w/out this parameter: returns null (not sure how to fix this error)
-					},
+					query: QUERY_RESERVATIONS //returns null (not sure how to fix this error)
 				});
 
 				cache.writeQuery({
@@ -79,6 +76,15 @@ function Reservation(history) {
 		const token = mutationResponse.data.addReservation.token; //removed token
 		Auth.getProfile(token); //revised AuthService value
 	};
+	
+	//
+	const navigate = useNavigate((event) => {
+		event.preventDefault();
+	})
+
+	const success =() => {
+		navigate('/reservation/success')
+	}
 
 	return (
 		<>
@@ -264,7 +270,8 @@ function Reservation(history) {
 								<ThemeProvider theme={theme}>
 									<RoundedButton
 										type="submit"
-										onClick={handleFormSubmit}
+										//onClick={handleFormSubmit} > to submit the data
+										onClick={success} // for temporary usage to navigate to next page
 										cursor="pointer"
 										color="secondary"
 										variant="contained"

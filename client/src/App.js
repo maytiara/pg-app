@@ -9,7 +9,6 @@ import {
 	createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-//import PrivateRoute from './private/PrivateRoute';
 
 // have to import the ./pages/<filename>
 import Home from "./pages/Home";
