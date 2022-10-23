@@ -1,0 +1,32 @@
+{
+  "name": "private-gourmet-app",
+  "version": "1.0.0",
+  "description": "A private chef booking app",
+  "main": "server/server.js",
+  "engines": {
+    "node": "16.15.1",
+    "npm": "8.17.0"
+  },
+  "scripts": {
+    "start": "node server/server.js",
+    "develop": "npx concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "seed": "cd server && npm run seed",
+    "build": "cd client && npm run build",
+    "prod": "if-env NODE_ENV=production && npm run develop"
+  },
+  "keywords": [],
+  "author": "May C.",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "express": "^4.17.1",
+    "if-env": "^1.0.4"
+  },
+  "devDependencies": {
+    "concurrently": "^5.1.0",
+    "dotenv": "^16.0.2",
+    "eslint": "^7.12.1",
+    "eslint-config-prettier": "^6.15.0",
+    "prettier": "^2.1.2"
+  }
+}
