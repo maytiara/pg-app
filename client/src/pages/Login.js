@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { LOGIN } from "../utils/mutations";
 import Auth from "../utils/auth";
 
+import Chefs from "../pages/Chefs";
+
 import css from "./Signup.module.css";
 import { Container, Box, Paper, TextField, Typography } from "@mui/material";
 import { ThemeProvider } from '@mui/material/styles';
@@ -13,7 +15,7 @@ import Footer from "../components/Footer/Footer";
 import NavBar from "../components/Buttons/NavBar";
 import { RoundedButton } from "../styles/StyledButton";
 
-function Login (props) {
+function Login () {
 
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN);
@@ -74,7 +76,7 @@ function Login (props) {
 						}}
 					>
 						{data ? (
-                <Link to="/chefs"></Link>
+                <Link to="/chefs" component={Chefs}></Link>
             ) : (
 
 						<Box

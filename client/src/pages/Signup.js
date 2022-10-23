@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { ADD_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
 
+import Chefs from "../pages/Chefs";
+
 import css from "./Signup.module.css";
 import { Container, Box, Paper, TextField, Typography } from "@mui/material";
 import { ThemeProvider } from '@mui/material/styles';
@@ -71,7 +73,7 @@ function Signup() {
 					}}
 				>
 					{data ? (
-                <Link to="/login"></Link>
+                <Link to="/chefs" component={Chefs}></Link>
             ) : (
 
 					<Box
