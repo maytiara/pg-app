@@ -21,6 +21,7 @@ import {
 	Typography,
 	Card,
 	Stack,
+	Fab,
 } from "@mui/material";
 
 import RestaurantMenuRoundedIcon from "@mui/icons-material/RestaurantMenuRounded";
@@ -47,10 +48,17 @@ function Chefs() {
 					</>
 				) : (
 					<>
-						<h2 style={{ fontWeight: 200 }}>
-							{" "}
-							You need to logged in to make a booking.{" "}
-						</h2>
+						<Fab
+							size="large"
+							variant="extended"
+							to="/login"
+							component={Link}
+							sx={{ backgroundColor: "#c5b044", mt: 2 }}
+						>
+							<Typography sx={{ width: "20rem", color: "#0c0c0c", fontWeight: 400 }}>
+								Please log-in for reservation
+							</Typography>
+						</Fab>
 					</>
 				)}
 			</div>
@@ -67,7 +75,7 @@ function Chefs() {
 					<div>
 						<ThemeProvider theme={theme}>
 							<Container style={{ display: "flex", justifyContent: "center" }}>
-								<Card sx={{ maxWidth: 345, minHeight: 480}}>
+								<Card sx={{ maxWidth: 345, minHeight: 480 }}>
 									<CardActionArea>
 										<CardMedia
 											component="img"
@@ -112,7 +120,7 @@ function Chefs() {
 					<div>
 						<ThemeProvider theme={theme}>
 							<Container style={{ display: "flex", justifyContent: "center" }}>
-								<Card sx={{ maxWidth: 345, minHeight: 480}}>
+								<Card sx={{ maxWidth: 345, minHeight: 480 }}>
 									<CardActionArea>
 										<CardMedia
 											component="img"
@@ -120,7 +128,7 @@ function Chefs() {
 											src={ChefMoriahImg}
 											alt="Chef Axel Yu"
 										/>
-										<CardContent >
+										<CardContent>
 											<Typography
 												gutterBottom
 												variant="h5"
@@ -157,7 +165,7 @@ function Chefs() {
 					<div>
 						<ThemeProvider theme={theme}>
 							<Container style={{ display: "flex", justifyContent: "center" }}>
-								<Card sx={{ maxWidth: 345, minHeight: 480}}>
+								<Card sx={{ maxWidth: 345, minHeight: 480 }}>
 									<CardActionArea>
 										<CardMedia
 											component="img"
