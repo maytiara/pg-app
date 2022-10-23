@@ -49,7 +49,13 @@ const theme = createTheme({
       xl: 1536 // large screens
     }
   },
-  shadows: ["none"]
+  MuiAppBar: {
+    root: {
+      'box-shadow':'none'
+    }
+  },
+  shadows: Array(25).fill('none'),
+
 });
 
 
