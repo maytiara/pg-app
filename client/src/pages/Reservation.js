@@ -27,13 +27,16 @@ import { RoundedButton } from "../styles/StyledButton";
 import DatePickerField from "../components/Forms/DatePickerField";
 import ChefSelection from "../components/Forms/ChefSelection";
 
-function Reservation({ isPublic = false }) {
+function Reservation(history) {
 	// Mutation to add reservation
 	const [addReservation] = useMutation(ADD_RESERVATION, {
 		update(cache, { data: { addReservation } }) {
 			try {
 				const { reservations } = cache.readQuery({
-					query: QUERY_RESERVATIONS, //This returns null (not sure how to fix this error)
+					query: QUERY_RESERVATIONS,
+					variables: {
+						...formState, // with or w/out this parameter: returns null (not sure how to fix this error)
+					},
 				});
 
 				cache.writeQuery({
