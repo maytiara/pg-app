@@ -20,7 +20,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import DrawerList from "./Drawer";
 
 const drawerWidth = 240;
-//const navItems = ["Home", "Who we are", "Meet your Chef", "Logout"];
 
 export default function NavBar(props) {
 	const { window } = props;
