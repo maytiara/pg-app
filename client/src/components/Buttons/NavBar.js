@@ -11,19 +11,16 @@ import {
 	Divider,
 	Drawer,
 	IconButton,
-	List,
-	ListItem,
-	ListItemButton,
-	ListItemText,
 	Toolbar,
 	Typography,
 	MenuItem,
 } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
+import DrawerList from "./Drawer";
 
 const drawerWidth = 240;
-const navItems = ["Home", "Who we are", "Meet your Chef", "Logout"];
+//const navItems = ["Home", "Who we are", "Meet your Chef", "Logout"];
 
 export default function NavBar(props) {
 	const { window } = props;
@@ -39,15 +36,8 @@ export default function NavBar(props) {
 				Private Gourmet
 			</Typography>
 			<Divider />
-			<List>
-				{navItems.map((item) => (
-					<ListItem key={item} disablePadding>
-						<ListItemButton sx={{ textAlign: "center" }}>
-							<ListItemText primary={item} />
-						</ListItemButton>
-					</ListItem>
-				))}
-			</List>
+
+			<DrawerList />
 		</Box>
 	);
 
@@ -184,7 +174,7 @@ export default function NavBar(props) {
 						}}
 						sx={{
 							display: { xs: "block", sm: "none" },
-							"& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWidth },
+							"& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWidth}
 						}}
 					>
 						{drawer}
