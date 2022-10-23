@@ -48,7 +48,8 @@ const theme = createTheme({
       lg: 1200, // desktop
       xl: 1536 // large screens
     }
-  }
+  },
+  shadows: ["none"]
 });
 
 
