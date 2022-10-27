@@ -7,7 +7,7 @@
 <br />
 
 ## Description
-***Private Gourmet*** - An app that allows you to find and book the best private chefs in town. And able you to experience fine dining in your home kitchen.
+![wip](https://img.shields.io/badge/Status-WIP-orange)<br />***Private Gourmet*** - An app that allows you to find and book the best private chefs in town. And able you to experience fine dining in your home kitchen.
 <br />
 
 - Deployed Link using Heroku: [Private Gourmet App](https://privategourmet.herokuapp.com/)
